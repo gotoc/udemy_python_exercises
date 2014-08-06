@@ -28,41 +28,28 @@ Here is my Python solution to accomplish this:
 # Initial steps: create empty arrays to hold the two lists
 counter_num1 = []
 counter_num2 = []
-# Build a function to take two numbers as arguments
+sum_list = []
 def russian_alg(num1, num2):
-    # Since we care for whole numbers, I set the num1 value as an int() and
-    # loop through it as long as it's 1 or greater.
     while int(num1) >=1:
-        # This is step 2 above, it is the division by 2
         num1 = num1 / 2
-        # if we go below 1, we ignore the result
         if num1 < 1:
             pass
         else:
-        # we add teh result to the first list (counter_num1)
             counter_num1.append(int(num1))
-    # very important we get the length of that list above. That is how many times we multiply
-    # the second value:
     c = len(counter_num1)
+    print(c)
     while c > 0:
-        # while c is greater then 0 we multiple the value (num2) by 2
-        # then I add it to our second list (counter_num2)
-        # and subtract the value of c by 1 after reach calculation
         num2 = num2 * 2
         counter_num2.append(num2)
         c -= 1
-    # Next we need to know the index of any even number in list 1 (counter_num1)
+    print(counter_num2)
     for i in counter_num1:
-        # I check if it's divisible by 2
-        if int(i) % 2 == 0:
-            # I grab the index of that number that's divisible by 2 (even number)
+        if int(i) % 2 == 1:
+            print(int(i))
             cn1 = counter_num1.index(i)
-            # Since our list's have matching lengths, I can delete the same index on the other list
-            del counter_num2[cn1]
-    # Finally, I print the result of summing each index in our second list (counter_num2)
-    print(sum(counter_num2))
-# Supplying numbers into the algorithm:
-russian_alg(238,13)
+            sum_list.append(counter_num2[cn1])
+    return sum(sum_list)
+russian_alg(5678,654)
 
 '''
 INSTRUCTORS CODE IS BELOW:  The Udemy course instructor had a much better method of achieving the same result.
