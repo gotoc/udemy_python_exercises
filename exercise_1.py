@@ -1,3 +1,4 @@
+import time
 '''
 Part 1 of Udemy's course on Intermediate Python is to create an algorithm to calculate the result of two
 numbers being multiplied together without a times table.  In this code exercise I was given the following information:
@@ -52,10 +53,11 @@ def russian_alg(num1, num2):
     return sum(sum_list)
 
 def test_russian():
+    start_time = time.time()
     assert russian_alg(24,16) == (24*16)
     assert russian_alg(16,24) == (24*16)
     assert russian_alg(2,50) == (2*50)
-    return "All tests have passed for russian_alg()"
+    return "All tests have passed for russian_alg(): %f seconds to calculate" % (time.time()-start_time)
 
 print(test_russian())
 
