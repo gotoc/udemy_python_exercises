@@ -64,4 +64,21 @@ def russian_alg(num1, num2):
 # Supplying numbers into the algorithm:
 russian_alg(238,13)
 
+'''
+INSTRUCTORS CODE IS BELOW:  The Udemy course instructor had a much better method of achieving the same result.
+He (Jason Elbourne) wrote the following code:
+def russian(a,b):
+    x = a; y = b
+    z = 0
+    while x > 0:
+        if x % 2 == 1: z = z + y
+        y = y << 1
+        x = x >> 1
+print(russian(357,16)
 
+His solution is pretty cool.  Very short and sweet and makes use of some features like binary shifting.  He didn't need to use any lists.
+Instead he created a while loop. In the loop he checks if X is a odd number.  If it is he sets z = z + his second number.  Then he uses binary shifting
+to multiple and divide by 2.  y << 1 being the multiplication by 2 and x >> 1 being the division by 2.  So as x gets smaller (towards 0)
+the loop runs and adds z to y (as long as x is an odd number.)
+
+'''
