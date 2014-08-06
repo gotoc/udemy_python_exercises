@@ -26,40 +26,59 @@ Sum (omitting ** values):   3094
 
 Here is my Python solution to accomplish this:
 '''
-# Moved the 3 lists inside the function. While outside the function if the
-# function is called multiple times, it appends results to the
-# list.  To avoid this, the lists were moved to the function, so each time the function
-# is called the lists are empty from the start.
+
+CACHE = {}
 
 def russian_alg(num1, num2):
-    counter_num1 = []
-    counter_num2 = []
-    sum_list = []
-    while int(num1) >=1:
-        num1 = num1 / 2
-        if num1 < 1:
-            pass
-        else:
-            counter_num1.append(int(num1))
-    c = len(counter_num1)
-    while c > 0:
-        num2 = num2 * 2
-        counter_num2.append(num2)
-        c -= 1
-    for i in counter_num1:
-        if int(i) % 2 == 1:
-            cn1 = counter_num1.index(i)
-            sum_list.append(counter_num2[cn1])
-    return sum(sum_list)
+    key = (num1,num2) # this is for the cache
+    if key in CACHE: # checking if we have the argument cached already
+        sum_list = CACHE[key] # if it's in the CACHE we just pull it without calcuating it
+    else:
+        print("Not cached... calculating...")
+        counter_num1 = []
+        counter_num2 = []
+        sum_list = []
+        while int(num1) >=1:
+            num1 = num1 / 2
+            if num1 < 1:
+                pass
+            else:
+                counter_num1.append(int(num1))
+        c = len(counter_num1)
+        while c > 0:
+            num2 = num2 * 2
+            counter_num2.append(num2)
+            c -= 1
+        for i in counter_num1:
+            if int(i) % 2 == 1:
+                cn1 = counter_num1.index(i)
+                sum_list.append(counter_num2[cn1])
+                z = sum(sum_list)
+                CACHE[key] = z
+        return z
 
 def test_russian():
-    start_time = time.time()
     assert russian_alg(24,16) == (24*16)
     assert russian_alg(16,24) == (24*16)
     assert russian_alg(2,50) == (2*50)
-    return "All tests have passed for russian_alg(): %f seconds to calculate" % (time.time()-start_time)
+    start_time = time.time()
+    print(russian_alg(24,16))
+    print("My Russian Peasant took: %f seconds to calculate" % (time.time()-start_time))
+    return "All tests have passed for russian_alg()"
 
-print(test_russian())
+def test_russian_perf():
+    start_time = time.time()
+    print(russian_alg(24,16))
+    print("My Russian Peasant took: %f seconds to calculate" % (time.time()-start_time))
+
+## CACHE: The first method call should not use cache, whereas the second will use cache
+## The time differences are pretty significant:
+## My Russian Peasant took: 0.000046 seconds to calculate
+## My Russian Peasant took: 0.000005 seconds to calculate
+## regular multiplication took: 0.000004 seconds to calculate
+print(test_russian_perf())
+print(test_russian_perf())
+
 
 
 '''
