@@ -33,6 +33,7 @@ def russian_alg(num1, num2):
     key = (num1,num2) # this is for the cache
     if key in CACHE: # checking if we have the argument cached already
         sum_list = CACHE[key] # if it's in the CACHE we just pull it without calcuating it
+        return sum_list
     else:
         print("Not cached... calculating...")
         counter_num1 = []
@@ -57,15 +58,6 @@ def russian_alg(num1, num2):
                 CACHE[key] = z
         return z
 
-def test_russian():
-    assert russian_alg(24,16) == (24*16)
-    assert russian_alg(16,24) == (24*16)
-    assert russian_alg(2,50) == (2*50)
-    start_time = time.time()
-    print(russian_alg(24,16))
-    print("My Russian Peasant took: %f seconds to calculate" % (time.time()-start_time))
-    return "All tests have passed for russian_alg()"
-
 def test_russian_perf():
     start_time = time.time()
     print(russian_alg(24,16))
@@ -78,7 +70,6 @@ def test_russian_perf():
 ## regular multiplication took: 0.000004 seconds to calculate
 print(test_russian_perf())
 print(test_russian_perf())
-
 
 
 '''
