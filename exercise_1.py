@@ -25,11 +25,15 @@ Sum (omitting ** values):   3094
 
 Here is my Python solution to accomplish this:
 '''
-# Initial steps: create empty arrays to hold the two lists
-counter_num1 = []
-counter_num2 = []
-sum_list = []
+# Moved the 3 lists inside the function. While outside the function if the
+# function is called multiple times, it appends results to the
+# list.  To avoid this, the lists were moved to the function, so each time the function
+# is called the lists are empty from the start.
+
 def russian_alg(num1, num2):
+    counter_num1 = []
+    counter_num2 = []
+    sum_list = []
     while int(num1) >=1:
         num1 = num1 / 2
         if num1 < 1:
@@ -46,7 +50,15 @@ def russian_alg(num1, num2):
             cn1 = counter_num1.index(i)
             sum_list.append(counter_num2[cn1])
     return sum(sum_list)
-print(russian_alg(24,16))
+
+def test_russian():
+    assert russian_alg(24,16) == (24*16)
+    assert russian_alg(16,24) == (24*16)
+    assert russian_alg(2,50) == (2*50)
+    return "All tests have passed for russian_alg()"
+
+print(test_russian())
+
 
 '''
 INSTRUCTORS CODE IS BELOW:  The Udemy course instructor had a much better method of achieving the same result.
